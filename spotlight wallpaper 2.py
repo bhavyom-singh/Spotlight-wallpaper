@@ -3,16 +3,28 @@ import shutil
 from PIL import Image
 
 ##do not alter source
-source = "C:/Users/Bhavyom/AppData/Local/Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets"
+username = os.environ["USERNAME"]
+source = "C:/Users/"+username+"/AppData/Local/Packages/Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy/LocalState/Assets"
 
 ## temporary destination
-os.chdir('C:/Users/Bhavyom/Desktop')
-os.mkdir('temp_destination')
-temp = "C:/Users/Bhavyom/Desktop/temp_destination/"
-
+os.chdir('C:/Users/'+username+'/Desktop')
+temp = "C:/Users/"+username+"/Desktop/temp_destination/"
+try:
+    os.mkdir('temp_destination')
+except:
+    os.chdir(temp)
+    for each in os.listdir():
+        os.remove(each)
+    
 ## set destination of your choice
-destination = "C:/Users/Bhavyom/Desktop/TestPython/"
+destination = "C:/Users/"+username+"/Desktop/SpotLightWallpaper/"
+try:
+    os.chdir(destination)
 
+except:
+    os.chdir('C:/Users/'+username+'/Desktop')
+    os.mkdir('SpotLightWallpaper')
+    
 ##empty temp destination
 os.chdir(temp)
 
@@ -53,7 +65,7 @@ for item1 in os.listdir():
         with Image.open(item1) as image:
             width,height = image.size
             image.close()
-            if width<500 and height<500:
+            if width<1900 and height<1000:
                 l2.remove(item1)
                 os.remove(item1)
     
